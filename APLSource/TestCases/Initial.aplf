@@ -1,0 +1,11 @@
+r←Initial
+ :If ≢/F.NormalizePath ##.CiderConfig.HOME F.PWD
+     :If 1 ∆YesOrNo'Current dir is not identiacal with the project''s home folder which is a requirement for the tests - enforce?'
+         {}F.Cd ##.CiderConfig.HOME
+         r←1
+     :Else
+         r←0
+     :EndIf
+ :Else
+     r←1
+ :EndIf

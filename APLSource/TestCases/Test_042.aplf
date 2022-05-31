@@ -1,0 +1,33 @@
+ r←Test_042(stopFlag batchFlag);⎕TRAP;path;zipFilename;targetFolder;myZip;src2;list2;list1;path2
+⍝ Create a new Zip archive, add two files and a directory with one file (in a sub-dir)
+ ⎕TRAP←(999 'C' '∘∘∘ ⍝ Deliberate error')(0 'N')
+ r←T._Failed
+
+ path←∆GetTestFolderInTemp 1⊃⎕SI
+ F.MkDir path,'/src'
+ F.MkDir path,'/unzipped'
+ (path,'/src/')⎕NCOPY F.ExpandPath ##.CiderConfig.HOME,'/TestData\level-1-a.txt'
+ (path,'/src/')⎕NCOPY F.ExpandPath ##.CiderConfig.HOME,'/TestData\level-1-b.txt'
+ F.MkDir src2←path,'/src/subfolder1/subfolder2'
+ (⊂'Blabla')F.NPUT src2,'/my.txt'
+ path2←path,'/src'
+
+ zipFilename←path,'/MyZipFile.zip'
+ myZip←⎕NEW ##.ZipArchive(,⊂zipFilename)
+
+ path2 myZip.Add'level-1-a.txt' 'level-1-b.txt'((1+≢path2)↓src2)
+
+ myZip.Dispose
+
+ zipFilename ##.ZipArchive.UnzipTo path,'/unzipped'
+
+ list1←{(≢⍵)↓¨⊃('recursive' 1)F.Dir ⍵,'*'}path2,'/'
+ list2←{(≢⍵)↓¨⊃('recursive' 1)F.Dir ⍵,'*'}path,'/unzipped/'
+ →T.GoToTidyUp~list1 ∆LayMatch list2
+
+ r←T._OK
+
+∆TidyUp:
+ myZip.Dispose
+ Assert 0=1⊃F.RmDir path
+⍝Done

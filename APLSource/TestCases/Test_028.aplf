@@ -1,0 +1,27 @@
+ r←Test_028(stopFlag batchFlag);⎕TRAP;path;zipFilename;targetFolder;myZip;list2;this;list1;path2
+⍝ Create a new Zip archive, add some files and then unzip it
+ ⎕TRAP←(999 'C' '∘∘∘ ⍝ Deliberate error')(0 'N')
+ r←T._Failed
+
+ path←∆GetTestFolderInTemp 1⊃⎕SI
+ zipFilename←path,'/MyZipFile.zip'
+ myZip←⎕NEW ##.ZipArchive(,⊂zipFilename)
+
+ list1←F.ListFiles'./'
+ myZip.Add list1
+ myZip.Dispose
+
+ path2←path,'/unzipped'
+ F.MkDir path
+ zipFilename ##.ZipArchive.UnzipTo path2
+ list2←⊃('recursive' 1)F.Dir path2,'/'
+ list2←(1+≢path2)↓¨list2
+
+ →T.GoToTidyUp(2↓¨list1)≢list2
+
+ r←T._OK
+
+∆TidyUp:
+ myZip.Dispose
+ Assert 0=1⊃F.RmDir path
+⍝Done

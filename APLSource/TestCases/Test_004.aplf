@@ -1,0 +1,33 @@
+ r←Test_004(stopFlag batchFlag);⎕TRAP;path;zipFilename;myZip;list;list2;list3
+⍝ Zip a file, dispose instance, then re-open and add some more files and list them, first with instance then with shared method
+ ⎕TRAP←(999 'C' '∘∘∘ ⍝ Deliberate error')(0 'N')
+ r←T._Failed
+
+ path←∆GetTestFolderInTemp 1⊃⎕SI
+ zipFilename←path,'/MyZipFile.zip'
+ myZip←⎕NEW ##.ZipArchive(,⊂zipFilename)
+
+ list←⊃('recursive' 1)F.Dir'./TestData/'
+ list/⍨←F.IsFile list
+ list←{⍵↓⍨2×('.'=⊃⍵)∧(⊃'/\'∊⍨1↑1↓⍵)}¨list   ⍝ Not required on Windows but elsewhere
+
+ myZip.Add 1↑list                   ⍝ That's right, only the first one here
+ myZip.Dispose
+
+ myZip←⎕NEW ##.ZipArchive(zipFilename 0)
+ myZip.Add 1↓list                   ⍝ Now all the other files
+ →T.GoToTidyUp≢/{F.EnforceSlash¨⍵}¨list myZip.List
+
+ list2←myZip.List
+ →T.GoToTidyUp 0=≢list2
+ myZip.Dispose
+
+ list3←##.ZipArchive.ListZipContents zipFilename
+ →T.GoToTidyUp 0=≢list3
+
+ r←T._OK
+
+∆TidyUp:
+ myZip.Dispose
+ Assert 0=1⊃F.RmDir path
+⍝Done

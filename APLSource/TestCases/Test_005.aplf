@@ -1,0 +1,31 @@
+ r←Test_005(stopFlag batchFlag);⎕TRAP;path;zipFilename;myZip;list1;list2;list
+⍝ Create a non-existing zip file, add some files, close it and re-open with `overwriteFlag←1`, then add some other files
+⍝ Must overwrite the ZIP
+ ⎕TRAP←(999 'C' '∘∘∘ ⍝ Deliberate error')(0 'N')
+ r←T._Failed
+
+ path←∆GetTestFolderInTemp 1⊃⎕SI
+ zipFilename←path,'/MyZipFile.zip'
+ myZip←⎕NEW ##.ZipArchive(,⊂zipFilename)
+
+ list←⊃('recursive' 1)F.Dir ##.CiderConfig.HOME,'/TestData/'
+ list/⍨←F.IsFile list
+
+ myZip.Add¨3↑list
+ list1←myZip.List
+ myZip.Dispose
+
+
+ myZip←⎕NEW ##.ZipArchive(zipFilename 1)
+ myZip.Add¨3↓list
+ myZip.Dispose
+
+ list2←##.ZipArchive.ListZipContents zipFilename
+
+ →T.GoToTidyUp(∨/list1∊list2)∨(∨/list2∊list1)
+
+ r←T._OK
+
+∆TidyUp:
+ Assert 0=1⊃F.RmDir path
+⍝Done
