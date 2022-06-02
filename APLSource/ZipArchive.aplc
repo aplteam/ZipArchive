@@ -26,11 +26,13 @@
 
     ∇ r←Version
       :Access Public Shared
-      r←'ZipArchive' '0.1.1+8' '2022-05-31'
+      r←'ZipArchive' '0.1.2+9' '2022-06-02'
     ∇
 
     ∇ History
       :Access Public Shared
+    ⍝ * 0.1.2 from 2022-06-02
+    ⍝   * Problem with backslashes fixed in `UnZipTo`
     ⍝ * 0.1.1 from 2022-05-31
     ⍝   * Couple of bug fixes especially important for Linux & Mac-OS
     ⍝ * 0.1.0 from 2022-05-20
@@ -225,7 +227,7 @@
       :If IsWindows
           r←zipFilename ##.DotNetZip.UnzipTo targetFolder
       :Else
-          zipFilename←AddExtension zipFilename
+          zipFilename←F.EnforceSlash AddExtension zipFilename
           r←⎕SH'unzip -o -qq ',zipFilename,(0<≢targetFolder)/' -d ',targetFolder
           ⍝ On my Ubuntu VM under Hyper-V I get files and dirs with no priviliges at all, so I need to establish defaults "manually":
           {}{⎕SH'chmod 666 "',⍵,'"'}EachIfNotEmpty'recursive'F.ListFiles targetFolder,'/'
