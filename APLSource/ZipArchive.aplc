@@ -26,11 +26,14 @@
 
     ∇ r←Version
       :Access Public Shared
-      r←'ZipArchive' '0.1.2+9' '2022-06-02'
+      r←'ZipArchive' '0.1.3+11' '2022-06-04'
     ∇
 
     ∇ History
       :Access Public Shared
+    ⍝ * 0.1.2 from 2022-06-02
+    ⍝   * unzip sometimes generated an error 66 (invalid CRC) when in reality it did unzip successfully
+    ⍝   * Bash statements are now catenated with "&&" rather than ";"
     ⍝ * 0.1.2 from 2022-06-02
     ⍝   * Problem with backslashes fixed in `UnZipTo`
     ⍝ * 0.1.1 from 2022-05-31
@@ -184,7 +187,7 @@
                   msg←⊃{⍺,';',⍵}/{'The file ''',⍵,''' already exists.'}¨b/names
                   msg ⎕SIGNAL 11
               :EndIf
-              res←⎕SH'cd ',targetFolder,';unzip ',('expand'F.NormalizePath _filename),∊' "'∘,¨names,¨'"'
+              res←⎕SH'cd ',targetFolder,' && unzip ',('expand'F.NormalizePath _filename),∊' "'∘,¨names,¨'"'
           :EndIf
       :EndIf
     ∇
@@ -215,11 +218,11 @@
       :Else
           zipFilename←AddExtension zipFilename
           ('Is not a directory: ',sourceFolder)Assert(⊃⊃⎕CLASS ⎕THIS).##.FilesAndDirs.IsDir sourceFolder
-          res←⎕SH'cd ',('expand'F.NormalizePath sourceFolder),'; zip -r ',zipFilename,' *'
+          res←⎕SH'cd ',('expand'F.NormalizePath sourceFolder),' && zip -r ',zipFilename,' *'
       :EndIf
     ∇
 
-    ∇ {r}←zipFilename UnzipTo targetFolder;F
+    ∇ {r}←zipFilename UnzipTo targetFolder;F;noOf;qdmx
     ⍝ Unzip `⍵` into `⍺`.\\
     ⍝ `targetFolder` must not yet exist.
       :Access Public Shared
@@ -228,7 +231,18 @@
           r←zipFilename ##.DotNetZip.UnzipTo targetFolder
       :Else
           zipFilename←F.EnforceSlash AddExtension zipFilename
-          r←⎕SH'unzip -o -qq ',zipFilename,(0<≢targetFolder)/' -d ',targetFolder
+          ⍝ For unknown reasons the following statement tends to crash, yet the unzip utility unzips everything anyway,
+          ⍝ therefore we trap the error and just compare the number of files in the archive with what we've got.
+          :Trap 11
+              r←⎕SH'unzip -o -qq ',zipFilename,(0<≢targetFolder)/' -d ',targetFolder
+          :Else
+              qdmx←⎕DMX
+              :If 66≠qdmx.ENX
+                  noOf←≢⎕SH'unzip -lo -qq ',zipFilename
+              :OrIf noOf≠≢⊃('recursive' 2)F.Dir targetFolder,'/'
+                  qdmx.Message ⎕SIGNAL qdmx.EN
+              :EndIf
+          :EndTrap
           ⍝ On my Ubuntu VM under Hyper-V I get files and dirs with no priviliges at all, so I need to establish defaults "manually":
           {}{⎕SH'chmod 666 "',⍵,'"'}EachIfNotEmpty'recursive'F.ListFiles targetFolder,'/'
           {}{⎕SH'chmod 777 "',⍵,'"'}EachIfNotEmpty'recursive'F.ListDirs targetFolder,'/'

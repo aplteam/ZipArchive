@@ -124,13 +124,13 @@ ul li, ol li {margin: 8pt 3pt;}
 <tr><th>Executed at</th><th>APLVersion</th><th>Memory (MB)</th></tr>
 </thead>
 <tbody>
-<tr><td>2022-05-20 19:27:32</td><td>Linux-64 ⋄ 18.2.45505.0 ⋄ S ⋄ Development</td><td>248</td></tr>
-<tr><td>2022-05-20 20:38:17</td><td>Windows-64 ⋄ 18.2.45596.0 ⋄ W ⋄ Development</td><td>53</td></tr>
+<tr><td>2022-06-05 14:31:32</td><td>Linux-64 ⋄ 18.2.45505.0 ⋄ S ⋄ Development</td><td>120</td></tr>
+<tr><td>2022-06-05 14:32:45</td><td>Windows-64 ⋄ 18.2.45645.0 ⋄ W ⋄ Development</td><td>55</td></tr>
 </tbody>
 </table>
-<p>Overall 94% of the testable code is covered.</p>
+<p>Overall 90% of the testable code is covered.</p>
 <p>(Comment lines, empty lines, all <code>:End</code>* lines etc. are ignored)</p>
-<p>15 of the fns/opr are 100% covered.</p>
+<p>14 of the fns/opr are 100% covered.</p>
 <div id="partly-covered" class="keep-together">
 <table id="percent">
 <thead>
@@ -139,6 +139,7 @@ ul li, ol li {margin: 8pt 3pt;}
 <tbody>
 <tr class="uncovered"><td>#.ZipArchive.ZipArchive.Version</td><td>2</td><td>0</td><td>1</td></tr>
 <tr class="uncovered"><td>#.ZipArchive.ZipArchive.GetHomeDir</td><td>4, 5, 7</td><td>0</td><td>3</td></tr>
+<tr><td>#.ZipArchive.ZipArchive.UnzipTo</td><td>5←≢14-18</td><td>62</td><td>13</td></tr>
 <tr><td>#.ZipArchive.ZipArchive.make</td><td>7</td><td>94</td><td>17</td></tr>
 <tr class="fullyCovered"><td>#.ZipArchive.ZipArchive.set_filename</td><td></td><td>100</td><td>0</td></tr>
 <tr class="fullyCovered"><td>#.ZipArchive.ZipArchive.get_filename</td><td></td><td>100</td><td>1</td></tr>
@@ -150,9 +151,8 @@ ul li, ol li {margin: 8pt 3pt;}
 <tr class="fullyCovered"><td>#.ZipArchive.ZipArchive.Delete</td><td></td><td>100</td><td>5</td></tr>
 <tr class="fullyCovered"><td>#.ZipArchive.ZipArchive.ExtractTo</td><td></td><td>100</td><td>13</td></tr>
 <tr class="fullyCovered"><td>#.ZipArchive.ZipArchive.Dispose</td><td></td><td>100</td><td>2</td></tr>
-<tr class="fullyCovered"><td>#.ZipArchive.ZipArchive.ZipFolder</td><td></td><td>100</td><td>5</td></tr>
-<tr class="fullyCovered"><td>#.ZipArchive.ZipArchive.UnzipTo</td><td></td><td>100</td><td>4</td></tr>
-<tr class="fullyCovered"><td>#.ZipArchive.ZipArchive.ListZipContents</td><td></td><td>100</td><td>7</td></tr>
+<tr class="fullyCovered"><td>#.ZipArchive.ZipArchive.ZipFolder</td><td></td><td>100</td><td>6</td></tr>
+<tr class="fullyCovered"><td>#.ZipArchive.ZipArchive.ListZipContents</td><td></td><td>100</td><td>8</td></tr>
 <tr class="fullyCovered"><td>#.ZipArchive.ZipArchive.MassageZipConentList</td><td></td><td>100</td><td>5</td></tr>
 <tr class="fullyCovered"><td>#.ZipArchive.ZipArchive.IsWindows</td><td></td><td>100</td><td>2</td></tr>
 </tbody>
@@ -174,7 +174,7 @@ $(document).ready(function() {
         dom: "Bft",
         buttons: [
         {
-            text: "Partly covered (1)",
+            text: "Partly covered (2)",
             titleAttr: "50%",
             className: "active",
             action: function ( e, dt, node, config ) {
@@ -202,7 +202,7 @@ $(document).ready(function() {
             }
         },
         {
-            text: "Fully covered (15)",
+            text: "Fully covered (14)",
             titleAttr: "100%",
             className: "active",
             action: function ( e, dt, node, config ) {
