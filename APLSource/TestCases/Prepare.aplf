@@ -3,7 +3,11 @@
  ⎕IO←1 ⋄ ⎕ML←1
  A←APLTreeUtils2 ⋄ F←FilesAndDirs
  T←⎕NEW Tester2 ⎕THIS
- testPath←(⊃1 ⎕NPARTS''),'TestResults'
+ :If 0=##.⎕NC'CiderConfig'
+     testPath←(⊃1 ⎕NPARTS''),'TestResults'
+ :Else
+     testPath←##.CiderConfig.HOME,'TestResults'
+ :EndIf
  testFilename←testPath,'/CodeCoverage'
  :If ⎕NEXISTS testPath
      :If ⎕NEXISTS testFilename,'.dcf'
