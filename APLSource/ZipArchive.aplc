@@ -26,7 +26,7 @@
 
     ∇ r←Version
       :Access Public Shared
-      r←'ZipArchive' '1.0.0+15' '2022-06-13'
+      r←'ZipArchive' '1.0.0+16' '2022-06-13'
     ∇
 
     ∇ History
