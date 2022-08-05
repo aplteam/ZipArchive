@@ -6,7 +6,7 @@
  :If 0=##.⎕NC'CiderConfig'
      testPath←(⊃1 ⎕NPARTS''),'TestResults'
  :Else
-     testPath←##.CiderConfig.HOME,'TestResults'
+     testPath←##.CiderConfig.HOME,'/TestResults'
  :EndIf
  testFilename←testPath,'/CodeCoverage'
  :If ⎕NEXISTS testPath
