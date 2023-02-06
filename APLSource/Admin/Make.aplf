@@ -1,4 +1,11 @@
- Make flag
+ Make flag;M;C;path;cfg;zipFilename;res
  :If flag
-     ⎕SE.MakeHelpers.CreateTatinPackageFromSingleScript ##.ZipArchive
+     M←⎕SE.MakeHelpers
+     C←##.CiderConfig
+     path←C.HOME,'/Dist/'
+     cfg←M.GetPackageCfg C.HOME
+     M.RecreateFolder path
+     zipFilename←⎕SE.Tatin.BuildPackage C.HOME path''
+     ⎕←'*** New version build successfully:',M.CR,'   ',zipFilename
  :EndIf
+ ⍝Done
