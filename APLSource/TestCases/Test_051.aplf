@@ -1,0 +1,25 @@
+ r←Test_051(stopFlag batchFlag);myZip;path;qdmx;res;zipFilename;⎕TRAP;path2
+⍝ Create a new Zip archive that has a space in its filename
+ ⎕TRAP←(999 'C' '∘∘∘ ⍝ Deliberate error')(0 'N')
+ r←T._Failed
+
+ path←∆GetTestFolderInTemp 1⊃⎕SI
+ F.MkDir path,'/src/sub1/sub2/sub3'
+ F.MkDir path,'/unzipped'
+ (⊂'file1')F.NPUT path,'/src/file1.txt'
+ (⊂'file2')F.NPUT path,'/src/sub1/file2.txt'
+ path2←path,'/src'
+
+ zipFilename←path,'/My ZipFile.zip'
+ myZip←⎕NEW ##.ZipArchive(,⊂zipFilename)
+ path2 myZip.Add(1+≢path2)↓¨⊃('recursive' 1)F.Dir path,'/src/'
+
+ path2←∆GetTestFolderInTemp(1⊃⎕SI),'_2'
+ myZip.Dispose
+ zipFilename ##.ZipArchive.UnzipTo path2
+ →T.GoToTidyUp≢/{(≢⍵)↓¨⊃F.Dir ⍵}¨(path,'/src/')(path2,'/')
+
+∆TidyUp:
+ myZip.Dispose
+ Assert 0=1⊃F.RmDir path
+⍝Done
