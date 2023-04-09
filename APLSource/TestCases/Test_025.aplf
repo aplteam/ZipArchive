@@ -21,7 +21,7 @@
  list2←⊃('recursive' 1)F.Dir ##.CiderConfig.HOME,'/TestData/'
  list2/⍨←F.IsFile list2
  list2←{⍵↓⍨'/\'∊⍨1⍴⍵}¨list2
- →T.GoToTidyUp~∆LayMatch/∆DropLeadingDotSlash¨F.NormalizePath¨list1 list2
+ →T.GoToTidyUp~APLTreeUtils2.LazyMatch/∆DropLeadingDotSlash¨F.NormalizePath¨list1 list2
  myZip.Dispose
  fileSize←{size←⎕NSIZE ⍵ ⋄ _←⎕NUNTIE ⍵ ⋄ size}zipFilename ⎕NTIE 0
  →T.GoToTidyUp 100>fileSize

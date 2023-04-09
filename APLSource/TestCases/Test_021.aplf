@@ -22,7 +22,7 @@
  :If 'Win'≢##.APLTreeUtils2.GetOperatingSystem ⍬
      list1←'/',¨list1  ⍝ On non- Windows platforms a leading "/" is part of the names
  :EndIf
-→T.GoToTidyUp~∆LayMatch/∆DropLeadingDotSlash¨F.NormalizePath¨list1 list2
+ →T.GoToTidyUp~APLTreeUtils2.LazyMatch/∆DropLeadingDotSlash¨F.NormalizePath¨list1 list2
  fileSize←{size←⎕NSIZE ⍵ ⋄ _←⎕NUNTIE ⍵ ⋄ size}zipFilename ⎕NTIE 0
  →T.GoToTidyUp 100>fileSize
 
