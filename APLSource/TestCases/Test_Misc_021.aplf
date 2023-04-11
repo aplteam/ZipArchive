@@ -1,4 +1,4 @@
- r←Test_021(stopFlag batchFlag);⎕TRAP;path;zipFilename;targetFolder;myZip;list2;this;list1;fileSize
+ r←Test_Misc_021(stopFlag batchFlag);⎕TRAP;path;zipFilename;targetFolder;myZip;list2;this;list1;fileSize
 ⍝ Create a new Zip archive and add some files
  ⎕TRAP←(999 'C' '∘∘∘ ⍝ Deliberate error')(0 'N')
  r←T._Failed

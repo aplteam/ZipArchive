@@ -1,4 +1,4 @@
- r←Test_009(stopFlag batchFlag);⎕TRAP;path;zipFilename;myZip1;myZip2;qdmx
+ r←Test_Misc_009(stopFlag batchFlag);⎕TRAP;path;zipFilename;myZip1;myZip2;qdmx
 ⍝ Creates a ZIP file and then tries to instantiate `ZipArchive` again on that very ZIP file (Windows only)
  ⎕TRAP←(999 'C' '∘∘∘ ⍝ Deliberate error')(0 'N')
  r←T._Failed
@@ -17,6 +17,8 @@
      qdmx←⎕DMX
      →T.GoToTidyUp'The process cannot access the file'{⍺≢(≢⍺)↑⍵}qdmx.EM
  :EndTrap
+
+ r←T._OK
 
 ∆TidyUp:
  myZip1.Dispose

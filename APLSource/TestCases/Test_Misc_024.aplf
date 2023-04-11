@@ -1,4 +1,4 @@
- r←Test_024(stopFlag batchFlag);⎕TRAP;path;zipFilename;targetFolder;myZip;this;expected;list
+ r←Test_Misc_024(stopFlag batchFlag);⎕TRAP;path;zipFilename;targetFolder;myZip;this;expected;list
 ⍝ Create a new Zip archive and add some files but drop one level of the path. Syntax III.
  ⎕TRAP←(999 'C' '∘∘∘ ⍝ Deliberate error')(0 'N')
  r←T._Failed

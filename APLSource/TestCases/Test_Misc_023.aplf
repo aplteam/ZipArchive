@@ -1,5 +1,5 @@
- r←Test_022(stopFlag batchFlag);⎕TRAP;path;zipFilename;targetFolder;myZip;this;expected;list
-⍝ Create a new Zip archive and add some files but drop one level of the path. Syntax I.
+ r←Test_Misc_023(stopFlag batchFlag);⎕TRAP;path;zipFilename;targetFolder;myZip;this;expected;list
+⍝ Create a new Zip archive and add some files but drop one level of the path. Syntax II.
  ⎕TRAP←(999 'C' '∘∘∘ ⍝ Deliberate error')(0 'N')
  r←T._Failed
 
@@ -8,7 +8,7 @@
  myZip←⎕NEW ##.ZipArchive(,⊂zipFilename)
 
  ##.CiderConfig.HOME myZip.Add'TestData\level-1-a.txt'
- (##.CiderConfig.HOME,'/TestData\')myZip.Add'level-1-b.txt'
+ (##.CiderConfig.HOME,'/TestData')myZip.Add'level-1-b.txt'
  list←myZip.List
 
  expected←F.NormalizePath'TestData\level-1-a.txt' 'level-1-b.txt'

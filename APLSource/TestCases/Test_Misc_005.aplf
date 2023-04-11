@@ -1,4 +1,4 @@
- r←Test_005(stopFlag batchFlag);⎕TRAP;path;zipFilename;myZip;list1;list2;list
+ r←Test_Misc_005(stopFlag batchFlag);⎕TRAP;path;zipFilename;myZip;list1;list2;list
 ⍝ Create a non-existing zip file, add some files, close it and re-open with `overwriteFlag←1`, then add some other files
 ⍝ Must overwrite the ZIP
  ⎕TRAP←(999 'C' '∘∘∘ ⍝ Deliberate error')(0 'N')

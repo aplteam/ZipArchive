@@ -1,4 +1,4 @@
- r←Test_049(stopFlag batchFlag);myZip;path;path2;qdmx;res;zipFilename;⎕TRAP
+ r←Test_Misc_049(stopFlag batchFlag);myZip;path;path2;qdmx;res;zipFilename;⎕TRAP
 ⍝ Create a new Zip archive with a nested structure of files, then unzip one sub-dir
  ⎕TRAP←(999 'C' '∘∘∘ ⍝ Deliberate error')(0 'N')
  r←T._Failed
@@ -32,7 +32,7 @@
          qdmx←⎕DMX
          →T.GoToTidyUp'On non-Windows platforms unzipping a folder is not supported yet'≢qdmx.EM
      :EndTrap
-    r←T._NotImplemented  ⍝ Unzipping a folder needs implementing    ⍝TODO⍝
+     r←T._NotImplemented  ⍝ Unzipping a folder needs implementing    ⍝TODO⍝
  :EndIf
 
 ∆TidyUp:

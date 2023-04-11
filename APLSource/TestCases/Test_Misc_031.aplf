@@ -1,4 +1,4 @@
- r←Test_031(stopFlag batchFlag);list1;list2;myZip;path;targetFolder;this;without1;without2;without3;zipFilename;⎕TRAP
+ r←Test_Misc_031(stopFlag batchFlag);list1;list2;myZip;path;targetFolder;this;without1;without2;without3;zipFilename;⎕TRAP
 ⍝ Create a new Zip archive, add some files and then delete some of them
  ⎕TRAP←(999 'C' '∘∘∘ ⍝ Deliberate error')(0 'N')
  r←T._Failed
@@ -26,9 +26,9 @@
  myZip.Delete without3
 
  myZip.Delete'DOES-NOT-EXIST'
- list2←F.NormalizePath ¨myZip.List
+ list2←F.NormalizePath¨myZip.List
 
- →T.GoToTidyUp≢/list2(list1~F.NormalizePath (⊂without1),without2,without3)
+ →T.GoToTidyUp≢/list2(list1~F.NormalizePath(⊂without1),without2,without3)
 
  r←T._OK
 

@@ -1,4 +1,4 @@
- r←Test_010(stopFlag batchFlag);⎕TRAP;path;zipFilename;targetFolder;list2;this;list1;path2
+ r←Test_Misc_010(stopFlag batchFlag);⎕TRAP;path;zipFilename;targetFolder;list2;this;list1;path2
 ⍝ Create a new Zip archive by zipping a folder (shared method), then unzip and check
  ⎕TRAP←(999 'C' '∘∘∘ ⍝ Deliberate error')(0 'N')
  r←T._Failed

@@ -1,4 +1,4 @@
- r←Test_044(stopFlag batchFlag);⎕TRAP;path;zipFilename;targetFolder;myZip;src2;list2;list1;path2
+ r←Test_Misc_044(stopFlag batchFlag);⎕TRAP;path;zipFilename;targetFolder;myZip;src2;list2;list1;path2
 ⍝ Create a new Zip archive, close it, instanciate again with just the filename
 ⍝ Should result in re-opening the zip file rather than replacing it
  ⎕TRAP←(999 'C' '∘∘∘ ⍝ Deliberate error')(0 'N')

@@ -1,4 +1,4 @@
- r←Test_047(stopFlag batchFlag);⎕TRAP;path;zipFilename;myZip;path2;qdmx
+ r←Test_Misc_047(stopFlag batchFlag);⎕TRAP;path;zipFilename;myZip;path2;qdmx
 ⍝ Create a new Zip archive, add a file and then try to unzip it when there is already such a file. Should throw an error.
  ⎕TRAP←(999 'C' '∘∘∘ ⍝ Deliberate error')(0 'N')
  r←T._Failed

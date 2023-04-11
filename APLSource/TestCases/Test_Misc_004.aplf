@@ -1,4 +1,4 @@
- r←Test_004(stopFlag batchFlag);⎕TRAP;path;zipFilename;myZip;list;list2;list3
+ r←Test_Misc_004(stopFlag batchFlag);⎕TRAP;path;zipFilename;myZip;list;list2;list3
 ⍝ Zip a file, dispose instance, then re-open and add some more files and list them, first with instance then with shared method
  ⎕TRAP←(999 'C' '∘∘∘ ⍝ Deliberate error')(0 'N')
  r←T._Failed

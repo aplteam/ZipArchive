@@ -1,4 +1,4 @@
- r←Test_006(stopFlag batchFlag);⎕TRAP;path;zipFilename;myZip;qdmx
+ r←Test_Misc_006(stopFlag batchFlag);⎕TRAP;path;zipFilename;myZip;qdmx
 ⍝ Check that the `filename` property a) is set correctly and b) is read-only
  ⎕TRAP←(999 'C' '∘∘∘ ⍝ Deliberate error')(0 'N')
  r←T._Failed
@@ -7,7 +7,7 @@
  zipFilename←path,'/MyZipFile.zip'
  myZip←⎕NEW ##.ZipArchive(,⊂zipFilename)
 
- →T.GoToTidyUp ≢/F.NormalizePath¨myZip.filename zipFilename
+ →T.GoToTidyUp≢/F.NormalizePath¨myZip.filename zipFilename
 
  :Trap 0
      myZip.filename←'Hello'

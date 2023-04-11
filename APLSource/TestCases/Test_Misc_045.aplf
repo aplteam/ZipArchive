@@ -1,4 +1,4 @@
- r←Test_045(stopFlag batchFlag);⎕TRAP;path;path2;zipFilename;myZip;myZip2
+ r←Test_Misc_045(stopFlag batchFlag);⎕TRAP;path;path2;zipFilename;myZip;myZip2
 ⍝ Create a new Zip archive, add two files  and then unzip them one after the other
  ⎕TRAP←(999 'C' '∘∘∘ ⍝ Deliberate error')(0 'N')
  r←T._Failed

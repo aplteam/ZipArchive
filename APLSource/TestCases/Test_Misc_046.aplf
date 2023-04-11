@@ -1,4 +1,4 @@
- r←Test_046(stopFlag batchFlag);⎕TRAP;path;path2;zipFilename;myZip
+ r←Test_Misc_046(stopFlag batchFlag);⎕TRAP;path;path2;zipFilename;myZip
 ⍝ Create a new Zip archive, add two files, one in a dub-dir,  and then unzip them one after the other
  ⎕TRAP←(999 'C' '∘∘∘ ⍝ Deliberate error')(0 'N')
  r←T._Failed

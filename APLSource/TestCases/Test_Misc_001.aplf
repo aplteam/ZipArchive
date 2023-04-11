@@ -1,10 +1,10 @@
- r←Test_002(stopFlag batchFlag);⎕TRAP;path;zipFilename;targetFolder;list1;list2
-⍝ Zip a single file with extension ".zip" and then unzip it and check its content.
+ r←Test_Misc_001(stopFlag batchFlag);⎕TRAP;path;zipFilename;targetFolder;list1;list2
+⍝ Zip a single file without extension (becomes ".zip") and then unzip it and check its content.
  ⎕TRAP←(999 'C' '∘∘∘ ⍝ Deliberate error')(0 'N')
  r←T._Failed
 
  path←∆GetTestFolderInTemp 1⊃⎕SI
- zipFilename←path,'/MyZipFile.zip'
+ zipFilename←path,'/MyZipFile'
  zipFilename←'./TestData'##.ZipArchive.ZipFolder zipFilename
  list1←{(≢⍵)↓¨⊃('recursive' 1)F.Dir ⍵}'./TestData/'
 
