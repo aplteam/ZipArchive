@@ -32,7 +32,7 @@
          qdmx←⎕DMX
          →T.GoToTidyUp'On non-Windows platforms unzipping a folder is not supported yet'≢qdmx.EM
      :EndTrap
-     r←T._NotImplemented  ⍝ Unzipping a folder needs implementing    ⍝TODO⍝
+     r←T._NotImplemented  ⍝ Unzipping a folder needs implementing
  :EndIf
 
 ∆TidyUp:
