@@ -42,6 +42,7 @@
     ∇ History
       :Access Public Shared  
     ⍝ * 2.0.0 from 2025-03-04
+    ⍝   * Potentially breaking: misspelled `MassageZipConentList` corrected
     ⍝   * Potentially breaking change: `Version` now returns a char vector with the version from the package config file
     ⍝ * 1.2.1 from 2024-10-13
     ⍝   Spaces in filesnames made ZipArchive crash
@@ -175,7 +176,7 @@
       :Else
           (rc msg)←Exec'unzip -l "',(_filename~'"'),'"'
           msg Assert 0=rc
-          r←MassageZipConentList msg
+          r←MassageZipContentList msg
       :EndIf
     ∇
 
@@ -302,7 +303,7 @@
           zipFilename←AddExtension zipFilename
           (rc msg)←Exec'unzip -l ',zipFilename
           msg Assert 0=rc
-          r←MassageZipConentList msg
+          r←MassageZipContentList msg
       :EndIf
     ∇
 
@@ -310,7 +311,7 @@
 
     Assert←{⍺←'' ⋄ (,1)≡,⍵:r←1 ⋄ ⎕ML←1 ⋄ ⍺ ⎕SIGNAL 1↓(⊃∊⍵),11}
 
-    ∇ list←MassageZipConentList list;A
+    ∇ list←MassageZipContentList list;A
     ⍝ `list`comes from "unzip -l and has a specific contents
       A←(⊃⊃⎕CLASS ⎕THIS).##.APLTreeUtils2
       :If 0<≢list←3↓¯2↓list
